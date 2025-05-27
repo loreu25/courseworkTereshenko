@@ -1,0 +1,51 @@
+@model IEnumerable<UniversitySystem2.Models.Schedule>
+@{
+    ViewBag.Title = "Расписание";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header">Список занятий</div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="card-title">Список занятий</h2>
+            @if (User.IsInRole("Администратор") || User.IsInRole("Преподаватель"))
+            {
+                <a class="btn btn-primary" href="/Schedule/Create">Добавить занятие</a>
+            }
+        </div>
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Группа</th>
+                    <th>Дисциплина</th>
+                    <th>Преподаватель</th>
+                    <th>Аудитория</th>
+                    <th style="width:180px"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.Date.ToString("dd.MM.yyyy")</td>
+                    <td>@s.Time</td>
+                    <td>@s.Group?.Name</td>
+                    <td>@s.Subject?.Name</td>
+                    <td>@s.Teacher?.FullName</td>
+                    <td>@s.Room</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="/Schedule/Details/@s.Id">Детали</a>
+                        @if (User.IsInRole("Администратор") || User.IsInRole("Преподаватель"))
+                        {
+                            <a class="btn btn-warning btn-sm" href="/Schedule/Edit/@s.Id">Изменить</a>
+                            <a class="btn btn-danger btn-sm" href="/Schedule/Delete/@s.Id">Удалить</a>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

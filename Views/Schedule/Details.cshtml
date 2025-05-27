@@ -1,0 +1,21 @@
+@model UniversitySystem2.Models.Schedule
+@{
+    ViewBag.Title = "Детали занятия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header">Детали занятия</div>
+    <div class="card-body">
+        <p><b>Дата:</b> @Model.Date.ToString("dd.MM.yyyy")</p>
+        <p><b>Время:</b> @Model.Time</p>
+        <p><b>Группа:</b> @Model.Group?.Name</p>
+        <p><b>Дисциплина:</b> @Model.Subject?.Name</p>
+        <p><b>Преподаватель:</b> @Model.Teacher?.FullName</p>
+        <p><b>Аудитория:</b> @Model.Room</p>
+        @if (User.IsInRole("Администратор") || User.IsInRole("Преподаватель"))
+        {
+            <a class="btn btn-success me-2" href="/Attendance/Create?scheduleId=@Model.Id">Отметить посещаемость</a>
+        }
+        <a class="btn btn-secondary" href="/Schedule/Index">Назад к списку</a>
+    </div>
+</div>

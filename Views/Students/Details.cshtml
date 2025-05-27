@@ -1,0 +1,8 @@
+@model UniversitySystem2.Models.Student
+@{
+    ViewBag.Title = "Детали студента";
+}
+<h2>Детали студента</h2>
+<p><b>ФИО:</b> @Model.FullName</p>
+<p><b>Группа:</b> @Model.Group?.Name</p>
+<p><a href="/Students/Index">Назад к списку</a></p>

@@ -1,0 +1,19 @@
+@model UniversitySystem2.Models.Subject
+@{
+    ViewBag.Title = "Редактировать дисциплину";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header">Редактировать дисциплину</div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="mb-3">
+                <label class="form-label">Название</label>
+                <input class="form-control" type="text" name="Name" value="@Model.Name" required />
+            </div>
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+            <a class="btn btn-secondary ms-2" href="/Subjects/Index">Назад к списку</a>
+        </form>
+    </div>
+</div>

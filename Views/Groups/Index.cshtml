@@ -1,0 +1,35 @@
+@model IEnumerable<UniversitySystem2.Models.Group>
+@{
+    ViewBag.Title = "Группы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header">Список групп</div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="card-title">Список групп</h2>
+            <a class="btn btn-primary" href="/Groups/Create">Добавить группу</a>
+        </div>
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Название</th>
+                    <th style="width:180px"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var g in Model)
+            {
+                <tr>
+                    <td>@g.Name</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="/Groups/Details/@g.Id">Детали</a>
+                        <a class="btn btn-warning btn-sm" href="/Groups/Edit/@g.Id">Изменить</a>
+                        <a class="btn btn-danger btn-sm" href="/Groups/Delete/@g.Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

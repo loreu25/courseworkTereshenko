@@ -1,0 +1,33 @@
+@model UniversitySystem2.Models.Attendance
+@{
+    ViewBag.Title = "Отметить посещаемость";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var students = ViewBag.Students as List<UniversitySystem2.Models.Student>;
+    var schedule = ViewBag.Schedule as UniversitySystem2.Models.Schedule;
+}
+<div class="card mt-4">
+    <div class="card-header">Отметить посещаемость</div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" name="ScheduleId" value="@Model.ScheduleId" />
+            <div class="mb-3">
+                <label class="form-label">Студент</label>
+                <select class="form-select" name="StudentId" required>
+                    @foreach (var student in students)
+                    {
+                        <option value="@student.Id">@student.FullName</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Статус</label>
+                <select class="form-select" name="Status" required>
+                    <option value="Присутствует">Присутствует</option>
+                    <option value="Отсутствует">Отсутствует</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+            <a class="btn btn-secondary ms-2" href="/Attendance/Index?scheduleId=@Model.ScheduleId">Назад к списку</a>
+        </form>
+    </div>
+</div>

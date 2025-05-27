@@ -1,0 +1,38 @@
+@model IEnumerable<UniversitySystem2.Models.Student>
+@{
+    ViewBag.Title = "Студенты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header">Список студентов</div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="card-title">Список студентов</h2>
+            <a class="btn btn-primary" href="/Students/Create">Добавить студента</a>
+        </div>
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>ФИО</th>
+                    <th>Группа</th>
+                    <th style="width:180px"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.FullName</td>
+                    <td>@s.Group?.Name</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="/Students/Details/@s.Id">Детали</a>
+                        <a class="btn btn-warning btn-sm" href="/Students/Edit/@s.Id">Изменить</a>
+                        <a class="btn btn-danger btn-sm" href="/Students/Delete/@s.Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+</table>

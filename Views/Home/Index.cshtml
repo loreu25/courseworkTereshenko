@@ -1,0 +1,9 @@
+@{
+    ViewBag.Title = "Главная страница";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="text-center mt-5">
+    <h2 class="mb-4">Добро пожаловать в систему учёта студентов и преподавателей!</h2>
+    <p>Вы вошли как: <b>@User.Identity.Name</b></p>
+    <p>Ваша роль: <b>@User.FindFirst("http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value</b></p>
+</div>

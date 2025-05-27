@@ -1,0 +1,28 @@
+@{
+    ViewBag.Title = "Вход";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Вход</div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Логин</label>
+                        <input class="form-control" type="text" name="login" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Пароль</label>
+                        <input class="form-control" type="password" name="password" required />
+                    </div>
+                    <button class="btn btn-primary w-100" type="submit">Войти</button>
+                    <div class="mt-3 text-center" style="color:red">@ViewBag.Error</div>
+                </form>
+                <div class="mt-3 text-center">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

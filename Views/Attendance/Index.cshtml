@@ -1,0 +1,44 @@
+@model IEnumerable<UniversitySystem2.Models.Attendance>
+@{
+    ViewBag.Title = "Посещаемость";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header">Список посещаемости</div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Студент</th>
+                    <th>Группа</th>
+                    <th>Дисциплина</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Статус</th>
+                    <th style="width:180px"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var a in Model)
+            {
+                <tr>
+                    <td>@a.Student?.FullName</td>
+                    <td>@a.Schedule?.Group?.Name</td>
+                    <td>@a.Schedule?.Subject?.Name</td>
+                    <td>@a.Schedule?.Date.ToString("dd.MM.yyyy")</td>
+                    <td>@a.Schedule?.Time</td>
+                    <td>@a.Status</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="/Attendance/Details/@a.Id">Детали</a>
+                        @if (User.IsInRole("Администратор") || User.IsInRole("Преподаватель"))
+                        {
+                            <a class="btn btn-warning btn-sm" href="/Attendance/Edit/@a.Id">Изменить</a>
+                            <a class="btn btn-danger btn-sm" href="/Attendance/Delete/@a.Id">Удалить</a>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

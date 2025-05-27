@@ -1,0 +1,16 @@
+@model UniversitySystem2.Models.Group
+@{
+    ViewBag.Title = "Удалить группу";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header bg-danger text-white">Удалить группу</div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <p>Вы уверены, что хотите удалить группу <b>@Model.Name</b>?</p>
+            <button class="btn btn-danger" type="submit">Удалить</button>
+            <a class="btn btn-secondary ms-2" href="/Groups/Index">Отмена</a>
+        </form>
+    </div>
+</div>

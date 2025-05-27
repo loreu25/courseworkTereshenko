@@ -1,0 +1,17 @@
+@model UniversitySystem2.Models.Attendance
+@{
+    ViewBag.Title = "Детали посещаемости";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header">Детали посещаемости</div>
+    <div class="card-body">
+        <p><b>Студент:</b> @Model.Student?.FullName</p>
+        <p><b>Группа:</b> @Model.Schedule?.Group?.Name</p>
+        <p><b>Дисциплина:</b> @Model.Schedule?.Subject?.Name</p>
+        <p><b>Дата:</b> @Model.Schedule?.Date.ToString("dd.MM.yyyy")</p>
+        <p><b>Время:</b> @Model.Schedule?.Time</p>
+        <p><b>Статус:</b> @Model.Status</p>
+        <a class="btn btn-secondary" href="/Attendance/Index?scheduleId=@Model.ScheduleId">Назад к списку</a>
+    </div>
+</div>

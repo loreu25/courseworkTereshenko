@@ -1,0 +1,11 @@
+@model UniversitySystem2.Models.Student
+@{
+    ViewBag.Title = "Удалить студента";
+}
+<h2>Удалить студента</h2>
+<form method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <p>Вы уверены, что хотите удалить студента <b>@Model.FullName</b>?</p>
+    <button type="submit">Удалить</button>
+    <a href="/Students/Index">Отмена</a>
+</form>

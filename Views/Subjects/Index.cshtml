@@ -1,0 +1,35 @@
+@model IEnumerable<UniversitySystem2.Models.Subject>
+@{
+    ViewBag.Title = "Дисциплины";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header">Список дисциплин</div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="card-title">Список дисциплин</h2>
+            <a class="btn btn-primary" href="/Subjects/Create">Добавить дисциплину</a>
+        </div>
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Название</th>
+                    <th style="width:180px"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.Name</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="/Subjects/Details/@s.Id">Детали</a>
+                        <a class="btn btn-warning btn-sm" href="/Subjects/Edit/@s.Id">Изменить</a>
+                        <a class="btn btn-danger btn-sm" href="/Subjects/Delete/@s.Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

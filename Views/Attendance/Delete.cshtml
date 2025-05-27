@@ -1,0 +1,17 @@
+@model UniversitySystem2.Models.Attendance
+@{
+    ViewBag.Title = "Удалить посещаемость";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header bg-danger text-white">Удалить посещаемость</div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <input type="hidden" name="ScheduleId" value="@Model.ScheduleId" />
+            <p>Вы уверены, что хотите удалить запись о посещаемости студента <b>@Model.Student?.FullName</b>?</p>
+            <button class="btn btn-danger" type="submit">Удалить</button>
+            <a class="btn btn-secondary ms-2" href="/Attendance/Index?scheduleId=@Model.ScheduleId">Отмена</a>
+        </form>
+    </div>
+</div>

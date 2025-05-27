@@ -1,0 +1,25 @@
+@model UniversitySystem2.Models.Student
+@{
+    ViewBag.Title = "Редактировать студента";
+}
+<h2>Редактировать студента</h2>
+<form method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div>
+        <label>ФИО</label>
+        <input type="text" name="FullName" value="@Model.FullName" required />
+    </div>
+    <div>
+        <label>Группа</label>
+        <select name="GroupId" required>
+            @foreach (var group in ViewBag.Groups)
+            {
+                <option value="@group.Id" @(group.Id == Model.GroupId ? "selected" : "")>@group.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <button type="submit">Сохранить</button>
+    </div>
+</form>
+<p><a href="/Students/Index">Назад к списку</a></p>

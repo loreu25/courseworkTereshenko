@@ -1,0 +1,54 @@
+@model UniversitySystem2.Models.Schedule
+@{
+    ViewBag.Title = "Редактировать занятие";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header">Редактировать занятие</div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="mb-3">
+                <label class="form-label">Дата</label>
+                <input class="form-control" type="date" name="Date" value="@Model.Date.ToString("yyyy-MM-dd")" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Время</label>
+                <input class="form-control" type="text" name="Time" value="@Model.Time" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Группа</label>
+                <select class="form-select" name="GroupId" required>
+                    @foreach (var group in ViewBag.Groups)
+                    {
+                        <option value="@group.Id" @(group.Id == Model.GroupId ? "selected" : "")>@group.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Дисциплина</label>
+                <select class="form-select" name="SubjectId" required>
+                    @foreach (var subject in ViewBag.Subjects)
+                    {
+                        <option value="@subject.Id" @(subject.Id == Model.SubjectId ? "selected" : "")>@subject.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Преподаватель</label>
+                <select class="form-select" name="TeacherId" required>
+                    @foreach (var teacher in ViewBag.Teachers)
+                    {
+                        <option value="@teacher.Id" @(teacher.Id == Model.TeacherId ? "selected" : "")>@teacher.FullName</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Аудитория</label>
+                <input class="form-control" type="text" name="Room" value="@Model.Room" />
+            </div>
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+            <a class="btn btn-secondary ms-2" href="/Schedule/Index">Назад к списку</a>
+        </form>
+    </div>
+</div>

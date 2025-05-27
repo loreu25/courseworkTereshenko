@@ -1,0 +1,16 @@
+@model UniversitySystem2.Models.Schedule
+@{
+    ViewBag.Title = "Удалить занятие";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-4">
+    <div class="card-header bg-danger text-white">Удалить занятие</div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <p>Вы уверены, что хотите удалить занятие <b>@Model.Subject?.Name</b> для группы <b>@Model.Group?.Name</b>?</p>
+            <button class="btn btn-danger" type="submit">Удалить</button>
+            <a class="btn btn-secondary ms-2" href="/Schedule/Index">Отмена</a>
+        </form>
+    </div>
+</div>
