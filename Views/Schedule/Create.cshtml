@@ -12,8 +12,15 @@
                 <input class="form-control" type="date" name="Date" value="@Model?.Date.ToString("yyyy-MM-dd")" required />
             </div>
             <div class="mb-3">
-                <label class="form-label">Время</label>
-                <input class="form-control" type="text" name="Time" value="@Model?.Time" placeholder="09:00-10:30" required />
+                <label class="form-label">Номер пары</label>
+                <select class="form-select" name="LessonNumber" required>
+                    @foreach (var lessonTime in ViewBag.LessonTimes)
+                    {
+                        <option value="@lessonTime.Key" @(Model?.LessonNumber == lessonTime.Key ? "selected" : "")>
+                            @lessonTime.Key пара (@lessonTime.Value)
+                        </option>
+                    }
+                </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Группа</label>

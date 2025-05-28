@@ -7,7 +7,7 @@
     <div class="card-header">Детали занятия</div>
     <div class="card-body">
         <p><b>Дата:</b> @Model.Date.ToString("dd.MM.yyyy")</p>
-        <p><b>Время:</b> @Model.Time</p>
+        <p><b>Время:</b> @(UniversitySystem2.Models.LessonTimeHelper.GetLessonTime(Model.LessonNumber)) (@Model.LessonNumber пара)</p>
         <p><b>Группа:</b> @Model.Group?.Name</p>
         <p><b>Дисциплина:</b> @Model.Subject?.Name</p>
         <p><b>Преподаватель:</b> @Model.Teacher?.FullName</p>

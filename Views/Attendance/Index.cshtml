@@ -26,7 +26,7 @@
                     <td>@a.Schedule?.Group?.Name</td>
                     <td>@a.Schedule?.Subject?.Name</td>
                     <td>@a.Schedule?.Date.ToString("dd.MM.yyyy")</td>
-                    <td>@a.Schedule?.Time</td>
+                    <td>@(UniversitySystem2.Models.LessonTimeHelper.GetLessonTime(a.Schedule?.LessonNumber ?? 0))</td>
                     <td>@a.Status</td>
                     <td>
                         <a class="btn btn-info btn-sm" href="/Attendance/Details/@a.Id">Детали</a>

@@ -1,25 +1,30 @@
 @model UniversitySystem2.Models.Student
 @{
     ViewBag.Title = "Редактировать студента";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Редактировать студента</h2>
-<form method="post">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <div>
-        <label>ФИО</label>
-        <input type="text" name="FullName" value="@Model.FullName" required />
+<div class="card mt-4">
+    <div class="card-header">Редактировать студента</div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="mb-3">
+                <label class="form-label">ФИО</label>
+                <input class="form-control" type="text" name="FullName" value="@Model.FullName" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Группа</label>
+                <select class="form-select" name="GroupId" required>
+                    @foreach (var group in ViewBag.Groups)
+                    {
+                        <option value="@group.Id" @(group.Id == Model.GroupId ? "selected" : "")>@group.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit">Сохранить</button>
+                <a class="btn btn-secondary ms-2" href="/Students/Index">Назад к списку</a>
+            </div>
+        </form>
     </div>
-    <div>
-        <label>Группа</label>
-        <select name="GroupId" required>
-            @foreach (var group in ViewBag.Groups)
-            {
-                <option value="@group.Id" @(group.Id == Model.GroupId ? "selected" : "")>@group.Name</option>
-            }
-        </select>
-    </div>
-    <div>
-        <button type="submit">Сохранить</button>
-    </div>
-</form>
-<p><a href="/Students/Index">Назад к списку</a></p>
+</div>

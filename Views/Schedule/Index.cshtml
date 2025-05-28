@@ -46,7 +46,7 @@
             {
                 <tr>
                     <td>@s.Date.ToString("dd.MM.yyyy")</td>
-                    <td>@s.Time</td>
+                    <td>@(ViewBag.LessonTimes[s.LessonNumber]) <small class="text-muted">(@s.LessonNumber пара)</small></td>
                     <td>@s.Group?.Name</td>
                     <td>@s.Subject?.Name</td>
                     <td>@s.Teacher?.FullName</td>

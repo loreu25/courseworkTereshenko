@@ -10,7 +10,7 @@
         <p><b>Группа:</b> @Model.Schedule?.Group?.Name</p>
         <p><b>Дисциплина:</b> @Model.Schedule?.Subject?.Name</p>
         <p><b>Дата:</b> @Model.Schedule?.Date.ToString("dd.MM.yyyy")</p>
-        <p><b>Время:</b> @Model.Schedule?.Time</p>
+        <p><b>Время:</b> @(UniversitySystem2.Models.LessonTimeHelper.GetLessonTime(Model.Schedule?.LessonNumber ?? 0)) (@Model.Schedule?.LessonNumber пара)</p>
         <p><b>Статус:</b> @Model.Status</p>
         <a class="btn btn-secondary" href="/Attendance/Index?scheduleId=@Model.ScheduleId">Назад к списку</a>
     </div>

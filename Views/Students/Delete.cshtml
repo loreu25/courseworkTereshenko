@@ -1,11 +1,20 @@
 @model UniversitySystem2.Models.Student
 @{
     ViewBag.Title = "Удалить студента";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Удалить студента</h2>
-<form method="post">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <p>Вы уверены, что хотите удалить студента <b>@Model.FullName</b>?</p>
-    <button type="submit">Удалить</button>
-    <a href="/Students/Index">Отмена</a>
-</form>
+<div class="card mt-4">
+    <div class="card-header">Удалить студента</div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="alert alert-danger">
+                <p>Вы уверены, что хотите удалить студента <b>@Model.FullName</b>?</p>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-danger" type="submit">Удалить</button>
+                <a class="btn btn-secondary ms-2" href="/Students/Index">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>

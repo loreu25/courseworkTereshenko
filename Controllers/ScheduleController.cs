@@ -69,10 +69,16 @@ namespace UniversitySystem2.Controllers
             }
 
             // Сортировка по дате и времени
-            query = query.OrderBy(s => s.Date).ThenBy(s => s.Time);
-
-            var schedule = await query.ToListAsync();
-            return View(schedule);
+            // Сортируем по дате и номеру пары
+            var sortedSchedule = await query
+                .OrderBy(s => s.Date)
+                .ThenBy(s => s.LessonNumber)
+                .ToListAsync();
+            
+            // Добавляем информацию о времени пар для отображения
+            ViewBag.LessonTimes = LessonTimeHelper.GetAllLessons();
+            
+            return View(sortedSchedule);
         }
 
         public IActionResult Create()
@@ -80,6 +86,7 @@ namespace UniversitySystem2.Controllers
             ViewBag.Groups = _context.Groups.ToList();
             ViewBag.Teachers = _context.Teachers.ToList();
             ViewBag.Subjects = _context.Subjects.ToList();
+            ViewBag.LessonTimes = LessonTimeHelper.GetAllLessons();
             return View();
         }
 
@@ -105,6 +112,7 @@ namespace UniversitySystem2.Controllers
             ViewBag.Groups = _context.Groups.ToList();
             ViewBag.Teachers = _context.Teachers.ToList();
             ViewBag.Subjects = _context.Subjects.ToList();
+            ViewBag.LessonTimes = LessonTimeHelper.GetAllLessons();
             return View(schedule);
         }
 

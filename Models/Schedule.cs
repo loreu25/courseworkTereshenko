@@ -10,7 +10,7 @@ namespace UniversitySystem2.Models
         [Required]
         public DateTime Date { get; set; }
         [Required]
-        public string Time { get; set; } // Например, "09:00-10:30"
+        public int LessonNumber { get; set; } // Номер пары (1-7)
         [Required]
         public int GroupId { get; set; }
         [ForeignKey("GroupId")]
