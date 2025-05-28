@@ -1,3 +1,102 @@
-/bin
-/obj
-university.db
+# Build results
+/bin/
+/obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code settings
+.vscode/
+
+# Rider settings
+.idea/
+*.sln.iml
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Database files
+*.mdf
+*.ldf
+*.sqlite
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+
+# Publish outputs
+/dist/
+/publish/
+
+# User secrets
+secrets.json
+/appsettings.Development.json
+/appsettings.Local.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Crash dumps
+*.dmp
+
+# Test results
+TestResults/
+
+# NCrunch
+*.ncrunch*
+_NCrunch_*
+
+# Recycle Bin used by Visual Studio
+$RECYCLE.BIN/
+
+# Backup & temp
+*.bak
+*.tmp
+~$*
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# DotCover
+*.dotCover
+
+# Local NuGet packages
+*.nupkg
+
+# Paket
+.paket/
+paket-files/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# Local history for Visual Studio
+.localhistory/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# VS Code workspace storage
+.vscode-test/
+
+# IIS Express
+/.vs/
+/.vsconfig
+
+# Others
+*.swp
+*.swo

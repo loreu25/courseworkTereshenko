@@ -1,0 +1,57 @@
+@model UniversitySystem2.Models.GroupAttendanceViewModel
+@{
+    ViewBag.Title = "Отметка посещаемости";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mt-4">
+    <div class="card-header">Отметка посещаемости</div>
+    <div class="card-body">
+        <div class="mb-4">
+            <h5>Информация о занятии:</h5>
+            <div class="row">
+                <div class="col-md-3"><strong>Дата:</strong> @Model.Schedule.Date.ToString("dd.MM.yyyy")</div>
+                <div class="col-md-3"><strong>Время:</strong> @(UniversitySystem2.Models.LessonTimeHelper.GetLessonTime(Model.Schedule.LessonNumber))</div>
+                <div class="col-md-3"><strong>Группа:</strong> @Model.Schedule.Group?.Name</div>
+                <div class="col-md-3"><strong>Дисциплина:</strong> @Model.Schedule.Subject?.Name</div>
+            </div>
+        </div>
+
+        <form method="post" action="/Attendance/SaveGroupAttendance">
+            <input type="hidden" name="scheduleId" value="@Model.ScheduleId" />
+            
+            <table class="table table-striped table-bordered table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th width="5%">№</th>
+                        <th>ФИО студента</th>
+                        <th width="20%">Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.StudentRecords.Count; i++)
+                    {
+                        var student = Model.StudentRecords[i];
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@student.StudentName</td>
+                            <td>
+                                <input type="hidden" name="records[@i].StudentId" value="@student.StudentId" />
+                                <input type="hidden" name="records[@i].StudentName" value="@student.StudentName" />
+                                <select name="records[@i].Status" class="form-select form-select-sm">
+                                    <option value="@((int)UniversitySystem2.Models.AttendanceStatus.Присутствует)" @(student.Status == UniversitySystem2.Models.AttendanceStatus.Присутствует ? "selected" : "")>Присутствует</option>
+                                    <option value="@((int)UniversitySystem2.Models.AttendanceStatus.Отсутствует)" @(student.Status == UniversitySystem2.Models.AttendanceStatus.Отсутствует ? "selected" : "")>Отсутствует</option>
+                                </select>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+                <a href="/Schedule/Details/@Model.ScheduleId" class="btn btn-secondary ms-2">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>

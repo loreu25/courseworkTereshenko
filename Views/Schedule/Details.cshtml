@@ -14,7 +14,8 @@
         <p><b>Аудитория:</b> @Model.Room</p>
         @if (User.IsInRole("Администратор") || User.IsInRole("Преподаватель"))
         {
-            <a class="btn btn-success me-2" href="/Attendance/Create?scheduleId=@Model.Id">Отметить посещаемость</a>
+            <a class="btn btn-success me-2" href="/Attendance/MarkAttendance?scheduleId=@Model.Id">Отметить посещаемость группы</a>
+            <a class="btn btn-outline-primary me-2" href="/Attendance/Index?scheduleId=@Model.Id">Просмотр посещаемости</a>
         }
         <a class="btn btn-secondary" href="/Schedule/Index">Назад к списку</a>
     </div>
