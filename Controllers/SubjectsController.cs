@@ -14,9 +14,18 @@ namespace UniversitySystem2.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var subjects = await _context.Subjects.ToListAsync();
+            ViewBag.CurrentFilter = searchString;
+            
+            var subjectsQuery = _context.Subjects.AsQueryable();
+            
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                subjectsQuery = subjectsQuery.Where(s => s.Name.Contains(searchString));
+            }
+            
+            var subjects = await subjectsQuery.ToListAsync();
             return View(subjects);
         }
 

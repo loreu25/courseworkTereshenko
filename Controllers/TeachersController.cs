@@ -15,10 +15,18 @@ namespace UniversitySystem2.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var teachers = await _context.Teachers.ToListAsync();
-            return View(teachers);
+            ViewBag.CurrentFilter = searchString;
+            
+            var teachers = _context.Teachers.AsQueryable();
+            
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                teachers = teachers.Where(t => t.FullName.Contains(searchString));
+            }
+            
+            return View(await teachers.ToListAsync());
         }
         public IActionResult Create()
         {

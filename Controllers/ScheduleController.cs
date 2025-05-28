@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniversitySystem2.Models;
+using System;
 using System.Threading.Tasks;
 using System.Linq;
 
@@ -14,14 +15,18 @@ namespace UniversitySystem2.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, DateTime? dateFilter)
         {
+            ViewBag.CurrentFilter = searchString;
+            ViewBag.DateFilter = dateFilter?.ToString("yyyy-MM-dd");
+
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == User.Identity.Name);
             IQueryable<Schedule> query = _context.Schedules
                 .Include(s => s.Group)
                 .Include(s => s.Teacher)
                 .Include(s => s.Subject);
 
+            // Применяем фильтры в зависимости от роли пользователя
             if (User.IsInRole("Студент"))
             {
                 // Найти студента, связанного с этим пользователем
@@ -48,7 +53,24 @@ namespace UniversitySystem2.Controllers
                     query = query.Where(s => false);
                 }
             }
-            // Администратор видит всё
+
+            // Применяем поиск, если задан
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(s => s.Group.Name.Contains(searchString) || 
+                                         s.Subject.Name.Contains(searchString) ||
+                                         s.Teacher.FullName.Contains(searchString));
+            }
+
+            // Фильтрация по дате
+            if (dateFilter.HasValue)
+            {
+                query = query.Where(s => s.Date.Date == dateFilter.Value.Date);
+            }
+
+            // Сортировка по дате и времени
+            query = query.OrderBy(s => s.Date).ThenBy(s => s.Time);
+
             var schedule = await query.ToListAsync();
             return View(schedule);
         }

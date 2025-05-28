@@ -10,6 +10,28 @@
             <h2 class="card-title">Список студентов</h2>
             <a class="btn btn-primary" href="/Students/Create">Добавить студента</a>
         </div>
+        <form method="get" action="" class="mb-3">
+            <div class="row">
+                <div class="col-md-5 mb-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Поиск по ФИО..." name="searchString" value="@ViewBag.CurrentFilter">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <select class="form-select" name="groupId">
+                        <option value="">Все группы</option>
+                        @foreach (var group in ViewBag.Groups)
+                        {
+                            <option value="@group.Id" @(ViewBag.SelectedGroup == group.Id ? "selected" : "")>@group.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+                    <a class="btn btn-outline-secondary" href="/Students">Сбросить</a>
+                </div>
+            </div>
+        </form>
         <table class="table table-bordered table-hover">
             <thead class="table-primary">
                 <tr>

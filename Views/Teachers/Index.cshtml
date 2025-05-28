@@ -10,6 +10,13 @@
             <h2 class="card-title">Список преподавателей</h2>
             <a class="btn btn-primary" href="/Teachers/Create">Добавить преподавателя</a>
         </div>
+        <form method="get" action="" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Поиск по ФИО..." name="searchString" value="@ViewBag.CurrentFilter">
+                <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+                <a class="btn btn-outline-secondary" href="/Teachers">Сбросить</a>
+            </div>
+        </form>
         <table class="table table-striped table-bordered table-hover">
             <thead class="table-primary">
                 <tr>

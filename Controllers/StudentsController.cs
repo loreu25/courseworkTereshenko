@@ -15,9 +15,25 @@ namespace UniversitySystem2.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, int? groupId)
         {
-            var students = await _context.Students.Include(s => s.Group).ToListAsync();
+            ViewBag.CurrentFilter = searchString;
+            ViewBag.SelectedGroup = groupId;
+            ViewBag.Groups = await _context.Groups.ToListAsync();
+            
+            var studentsQuery = _context.Students.AsQueryable();
+            
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                studentsQuery = studentsQuery.Where(s => s.FullName.Contains(searchString));
+            }
+            
+            if (groupId.HasValue)
+            {
+                studentsQuery = studentsQuery.Where(s => s.GroupId == groupId.Value);
+            }
+            
+            var students = await studentsQuery.Include(s => s.Group).ToListAsync();
             return View(students);
         }
         public IActionResult Create()

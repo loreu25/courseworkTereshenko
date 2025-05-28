@@ -14,10 +14,18 @@ namespace UniversitySystem2.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var groups = await _context.Groups.ToListAsync();
-            return View(groups);
+            ViewBag.CurrentFilter = searchString;
+            
+            var groups = _context.Groups.AsQueryable();
+            
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                groups = groups.Where(g => g.Name.Contains(searchString));
+            }
+            
+            return View(await groups.ToListAsync());
         }
 
         public IActionResult Create()

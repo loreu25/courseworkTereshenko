@@ -13,6 +13,22 @@
                 <a class="btn btn-primary" href="/Schedule/Create">Добавить занятие</a>
             }
         </div>
+        <form method="get" action="" class="mb-3">
+            <div class="row">
+                <div class="col-md-5 mb-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Поиск по группе, дисциплине или преподавателю..." name="searchString" value="@ViewBag.CurrentFilter">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <input type="date" class="form-control" name="dateFilter" value="@ViewBag.DateFilter">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-outline-secondary" type="submit">Применить фильтры</button>
+                    <a class="btn btn-outline-secondary" href="/Schedule">Сбросить</a>
+                </div>
+            </div>
+        </form>
         <table class="table table-bordered table-hover">
             <thead class="table-primary">
                 <tr>
